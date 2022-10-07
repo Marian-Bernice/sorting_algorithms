@@ -1,37 +1,27 @@
 #include "sort.h"
 
 /**
- * shell_sort - sort algorithm
+ * shell_sort - Shell sort - Knuth Sequence
  * @array: array to sort
- * @size: size of the array
+ * @size: size of array
  */
 void shell_sort(int *array, size_t size)
 {
-int inner, outer;
-int valueToInsert;
-int interval = 1;
-int i = 0;
+	int gap = 1, i, j, tmp;
 
-while(interval <= (int) size/3)
-	interval = interval*3 +1;
+	while (gap < ((int)(size)))
+		gap = (3 * gap) + 1;
+	for (gap = (gap - 1) / 3; gap > 0; gap = (gap - 1) / 3)
+	{
+		for (i = gap; i < (int)size; i += 1)
+		{
+			tmp = array[i];
 
+			for (j = i; j >= gap && array[j - gap] > tmp; j -= gap)
+				array[j] = array[j - gap];
 
-while(interval > 0) {
-
-	for(outer = interval; outer < (int) size; outer++) {
-		valueToInsert = array[outer];
-		inner = outer;
-
-		while(inner > interval -1 && array[inner - interval] >= valueToInsert) {
-			array[inner] = array[inner - interval];
-			inner -=interval;
+			array[j] = tmp;
 		}
-
-		array[inner] = valueToInsert;
+		print_array(array, size);
 	}
-
-	interval = (interval -1) /3;
-	print_array(array, size);
-	i++;
-}
 }
