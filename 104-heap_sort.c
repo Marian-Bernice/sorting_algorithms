@@ -13,7 +13,8 @@
 void sift_down(int *array, size_t size, size_t index, size_t nth)
 {
 	size_t largest, left, right;
-	do {
+	do 
+	{
 		left = getLeft(index);
 		right = getRight(index);
 		largest = index;
@@ -28,8 +29,10 @@ void sift_down(int *array, size_t size, size_t index, size_t nth)
 		array[index] ^= array[largest];
 		print_array(array, size);
 		index = largest;
-	} while (getLeft(index) <= nth);
+	}
+       	while (getLeft(index) <= nth);
 }
+
 /**
  * heap_sort - use heap sort
  * @array: array to sort
